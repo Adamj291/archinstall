@@ -22,10 +22,11 @@ EDITOR=nano visudo &&
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch &&
 grub-mkconfig -o /boot/grub/grub.cfg &&
 echo "Configuration Completed, Please run pacstrap.sh" &&
-systemctl enable NetworkManager.service &&
-systemctl enable bluetooth.service &&
-systemctl enable lightdm.service &&
-systemctl enable ufw.service && 
-systemctl enable sshd.service  &&
-systemctl enable cronie.service &&
-reboot now
+systemctl enable NetworkManager &&
+systemctl enable bluetooth &&
+systemctl enable lightdm &&
+systemctl enable ufw && 
+systemctl enable sshd  &&
+systemctl enable cronie &&
+sed -i 's/^\(#?greeter\)-session\s*=\s*\(.*\)/greeter-session = lightdm-webkit2-greeter #\1/ #\2g' /etc/lightdm/lightdm.conf &&
+exit
