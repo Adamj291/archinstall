@@ -8,9 +8,9 @@ echo LANG=en_GB.UTF-8 > /etc/locale.conf &&
 echo export LANG=en_GB.UTF-8 &&
 echo KEYMAP=uk > /etc/vconsole.conf &&
 echo arch-vm > /etc/hostname &&
-echo "127.0.0.1     localhost" >> /etc/hosts &&
+echo "127.0.0.1     localhost" > /etc/hosts &&
 echo "::1           localhost" >> /etc/hosts &&
-echo "127.0.0.1     arch-vm'localdomain arch-vm" >> /etc/hosts &&
+echo "127.0.0.1     arch-vm localdomain arch-vm" >> /etc/hosts &&
 echo mkinitcpio -P &&
 echo "Please change root password" &&
 passwd &&
