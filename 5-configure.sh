@@ -21,7 +21,6 @@ echo "Please uncomment %wheel ALL=(ALL) ALL" &&
 EDITOR=nano visudo &&
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch &&
 grub-mkconfig -o /boot/grub/grub.cfg &&
-echo "Configuration Completed, Please run pacstrap.sh" &&
 systemctl enable NetworkManager &&
 systemctl enable bluetooth &&
 systemctl enable lightdm &&
@@ -29,4 +28,8 @@ systemctl enable ufw &&
 systemctl enable sshd  &&
 systemctl enable cronie &&
 sed -i 's/^\(#?greeter\)-session\s*=\s*\(.*\)/greeter-session = lightdm-webkit2-greeter #\1/ #\2g' /etc/lightdm/lightdm.conf &&
+sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf && pacman -Fy &&
+git clone https://aur.archlinux.org/yay.git &&
+cd yay &&
+makepkg -si && cd .. && rm -R yay/ &&
 exit
