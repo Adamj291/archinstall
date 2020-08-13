@@ -10,4 +10,4 @@ mkfs.ext4 /dev/$rootvar &&
 mount /dev/$rootvar /mnt &&
 mkdir /mnt/efi &&
 mount /dev/$efivar /mnt/efi &&
-echo "Partitions and Mounts Setup, Please run 3-pacstrap"
+./3-pacstrap.sh
