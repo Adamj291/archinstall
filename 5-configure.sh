@@ -12,17 +12,17 @@ echo "::1           localhost" >> /etc/hosts &&
 echo "127.0.1.1     arch-vm localdomain.arch-vm" >> /etc/hosts &&
 echo "Relevant details added to /etc/hosts" &&
 mkinitcpio -P &&
-sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers && echo "sudoers file updated for wheel account" &&
 # echo "Please change root password" &&
 # passwd root &&
 read -p 'Please change root account password ' rootpw &&
-echo root:$rootpw | chpasswd &&
+echo "root:$rootpw" | chpasswd &&
 read -p 'whats your username? ' uservar &&
 useradd -m -G wheel -s /bin/bash $uservar &&
 #echo "Please change the $uservar user account password" &&
 #passwd $uservar &&
 read -p 'Please change '$uservar' account password ' userpw &&
-echo $uservar:$userpw | chpasswd &&
+echo "$uservar:$userpw" | chpasswd &&
+sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers && echo "sudoers file updated for wheel account" &&
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch &&
 grub-mkconfig -o /boot/grub/grub.cfg &&
 systemctl enable NetworkManager &&
