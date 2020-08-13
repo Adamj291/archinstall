@@ -8,12 +8,12 @@ echo LANG=en_GB.UTF-8 > /etc/locale.conf &&
 echo export LANG=en_GB.UTF-8 &&
 echo KEYMAP=uk > /etc/vconsole.conf &&
 echo arch-vm > /etc/hostname &&
-echo "127.0.0.1     localhost" > /etc/hosts &&
+echo "127.0.0.1     localhost" >> /etc/hosts &&
 echo "::1           localhost" >> /etc/hosts &&
-echo "127.0.0.1     arch-vm localdomain arch-vm" >> /etc/hosts &&
-echo mkinitcpio -P &&
+echo "127.0.1.1     arch-vm localdomain.arch-vm" >> /etc/hosts &&
+mkinitcpio -P &&
 echo "Please change root password" &&
-passwd &&
+passwd root &&
 read -p 'whats your username? ' uservar &&
 useradd -m -G wheel -s /bin/bash $uservar &&
 echo "Please change the $uservar user account password" &&
@@ -25,7 +25,7 @@ grub-mkconfig -o /boot/grub/grub.cfg &&
 systemctl enable NetworkManager &&
 systemctl enable bluetooth &&
 systemctl enable lightdm &&
-systemctl enable ufw && 
+systemctl enable ufw &&
 systemctl enable sshd  &&
 systemctl enable cronie &&
 sed -i 's/^\(#?greeter\)-session\s*=\s*\(.*\)/greeter-session = lightdm-webkit2-greeter #\1/ #\2g' /etc/lightdm/lightdm.conf &&
@@ -40,3 +40,6 @@ makepkg -si &&
 cd .. &&
 rm -R yay/ &&
 exit & reboot
+
+# sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+# sed -i "/\%wheel ALL\=\(ALL\) ALL/"'s/^#//' /etc/sudoers
