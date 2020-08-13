@@ -4,7 +4,7 @@
 
 Once booted into the Arch Live Environment check network connection and then run the following commands:
 
-`pacman -Syyu`
+`pacman -Sy`
 `pacman -S git`
 `git clone https://github.com/Adamj291/archinstall.git`
 `cd ./archinstall`
