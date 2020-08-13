@@ -12,7 +12,7 @@ echo "::1           localhost" >> /etc/hosts &&
 echo "127.0.1.1     arch-vm localdomain.arch-vm" >> /etc/hosts &&
 echo "Relevant details added to /etc/hosts" &&
 mkinitcpio -P &&
-sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoer && echo "sudoers file updated for wheel account" &&
+sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers && echo "sudoers file updated for wheel account" &&
 echo "Please change root password" &&
 passwd root &&
 read -p 'whats your username? ' uservar &&
@@ -42,5 +42,3 @@ exit & reboot
 
 # sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 # sed -i "/\%wheel ALL\=\(ALL\) ALL/"'s/^#//' /etc/sudoers
-
-s
