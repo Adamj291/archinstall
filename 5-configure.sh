@@ -31,18 +31,8 @@ systemctl enable lightdm ;
 systemctl enable ufw ;
 systemctl enable sshd  ;
 systemctl enable cronie ;
-sed -i 's/^\(#?greeter\)-session\s*=\s*\(.*\)/greeter-session = lightdm-webkit2-greeter #\1/ #\2g' /etc/lightdm/lightdm.conf ;
-git clone https://github.com/NoiSek/Aether.git ;
-cp --recursive Aether /usr/share/lightdm-webkit/themes/lightdm-webkit-theme-aether ;
-sed -i 's/^webkit_theme\s*=\s*\(.*\)/webkit_theme = lightdm-webkit-theme-aether #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf ;
-rm -R Aether/ ;
-sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf ; pacman -Fy ;
-git clone https://aur.archlinux.org/yay.git ;
-cd yay ;
-sudo -s makepkg -si ;
-cd .. ;
-rm -R yay/ ;
-exit & reboot
+echo "Please reboot your system";
+exit
 
 # sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 # sed -i "/\%wheel ALL\=\(ALL\) ALL/"'s/^#//' /etc/sudoers
