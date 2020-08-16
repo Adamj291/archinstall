@@ -25,12 +25,21 @@ echo "$uservar:$userpw" | chpasswd ;
 sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers ; echo "sudoers file updated for wheel account" ;
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch ;
 grub-mkconfig -o /boot/grub/grub.cfg ;
-systemctl enable NetworkManager ;
-systemctl enable bluetooth ;
-systemctl enable lightdm ;
-systemctl enable ufw ;
-systemctl enable sshd  ;
-systemctl enable cronie ;
+echo "Starting Services";
+systemctl enable NetworkManager 1> /dev/null;
+systemctl enable bluetooth 1> /dev/null;
+systemctl enable lightdm 1> /dev/null;
+systemctl enable ufw 1> /dev/null;
+systemctl enable sshd 1> /dev/null;
+systemctl enable cronie 1> /dev/null;
+echo "Installing Yay";
+cd tmp 1> /dev/null;
+git clone https://aur.archlinux.org/yay.git 1> /dev/null;
+cd yay 1> /dev/null;
+sudo -u nobody makepkg -si 1> /dev/null;
+cd .. 1> /dev/null;
+rm -R yay/ 1> /dev/null;
+echo "Yay has been installed";
 echo "Please reboot your system";
 exit
 
