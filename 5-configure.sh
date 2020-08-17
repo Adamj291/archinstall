@@ -36,7 +36,7 @@ echo "Installing Yay";
 cd tmp;
 git clone https://aur.archlinux.org/yay.git;
 cd yay;
-sudo -u nobody makepkg -si;
+sudo -u $uservar makepkg -si;
 cd ..;
 rm -R yay/;
 echo "Yay has been installed";
